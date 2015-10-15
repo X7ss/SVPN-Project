@@ -1,0 +1,172 @@
+///////////////STUNNEL\\\\\\\\\\\\\\\\\\\\
+
+apt-get install chkconfig
+
+apt-get install stunnel4
+
+cd /etc/stunnel/
+
+openssl genrsa -out server.key 4096
+
+openssl req -new -key server.key -out server.csr
+
+openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+
+cat server.key > server.pem && cat server.crt >> server.pem
+
+vim /etc/stunnel/stunnel.conf
+
+#######################stunnel.conf##################### SERVER
+chroot = var/lib/stunnel4
+; PID is created insidethe chroot jail
+pid = /stunnel4.pid
+setuid = stunnel4
+setgid = stunnel4
+;compression = rle
+cert = /etc/stunnel/server.pem
+key = /etc/stunnel/server.key
+[ssh]
+accept = 443
+connect = 127.0.0.1:22
+TIMEOUTclose = 0
+[openvpn]
+accept = 10443
+connect = 127.0.0.1:1194
+#########################################################
+
+vim /etc/default/stunnel4
+
+change ENABLED=0 to ENABLED=1
+
+vim /etc/init.d/stunnel4
+
+change ENABLED=0 to ENABLED=1
+
+/etc/init.d/stunnel4 start
+
+chkconfig stunnel4 on
+
+
+//////////OPENVPN\\\\\\\\\\\\\\\\
+cat /dev/net/tun (check si le tap/tun est activé) si = cat: /dev/net/tun: File descriptor in bad state -> alors OK
+
+apt-get install openvpn chkconfig
+
+cp -R /usr/share/doc/openvpn/examples/easy-rsa/ /etc/openvpn/
+
+cd /etc/openvpn/easy-rsa/2.0
+
+chmod 755 *
+
+source ./vars
+
+./vars
+
+./clean-all
+
+./build-ca
+
+./build-key-server server
+###########
+sign the certificate: y
+1 out of 1 certificate requests: y
+################
+./build-dh
+
+
+vim /etc/openvpn/server.conf
+
+##############################server.conf################
+port 1194 #- port
+proto tcp #- protocol
+duplicate-cn
+dev tun
+tun-mtu 1500
+tun-mtu-extra 32
+mssfix 1450
+ca /etc/openvpn/easy-rsa/2.0/keys/ca.crt
+cert /etc/openvpn/easy-rsa/2.0/keys/server.crt
+key /etc/openvpn/easy-rsa/2.0/keys/server.key
+dh /etc/openvpn/easy-rsa/2.0/keys/dh1024.pem
+plugin /usr/lib/openvpn/openvpn-auth-pam.so /etc/pam.d/login
+client-cert-not-required
+username-as-common-name
+server 10.8.0.0 255.255.255.0
+push "redirect-gateway def1"
+push "dhcp-option DNS 8.8.8.8"
+push "dhcp-option DNS 8.8.4.4"
+keepalive 5 30
+comp-lzo
+persist-key
+persist-tun
+status 1194.log
+verb 3
+############################################################
+
+service openvpn restart
+
+vim /etc/sysctl.conf
+
+changer #net.ipv4.ip_forward=1 to net.ipv4.ip_forward=1
+
+sysctl -p
+
+XEN / KVM IPtable
+
+iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+
+OPENVZ IP TABLE
+iptables -t nat -A POSTROUTING -o venet0 -j SNAT --to-source ip de ton serveur
+
+iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -j SNAT --to-source ip de ton serveur
+
+
+chkconfig openvpn on
+
+ca.crt dans -> /etc/openvpn/easy-rsa/2.0/keys/ca.crt (a rennomer quand tu le met dans svpn toussa toussa) 
+
+////////////////CLIENT\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+conf stunnel client example.conf
+
+client = yes
+delay = no
+[openvpn]
+accept = 127.0.0.1:1194
+connect = 185.52.1.13:9999 ###(ip de ton serveur)
+
+
+conf openvpn client example.ovpn
+
+client
+dev tun
+proto tcp
+remote 127.0.0.1 1194
+resolv-retry infinite
+nobind
+tun-mtu 1500
+tun-mtu-extra 32
+mssfix 1450
+persist-key
+persist-tun
+ca nl.crt ###(ton ca.crt)
+auth-user-pass
+comp-lzo
+verb 3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

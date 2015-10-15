@@ -1,0 +1,55 @@
+Mon Oct 12 16:17:37 2015 OpenVPN 2.2.2 Win32-MSVC++ [SSL] [LZO2] [PKCS11] built on Dec 15 2011
+Mon Oct 12 16:17:37 2015 WARNING: No server certificate verification method has been enabled.  See http://openvpn.net/howto.html#mitm for more info.
+Mon Oct 12 16:17:37 2015 NOTE: OpenVPN 2.1 requires '--script-security 2' or higher to call user-defined scripts or executables
+Mon Oct 12 16:17:37 2015 LZO compression initialized
+Mon Oct 12 16:17:37 2015 Control Channel MTU parms [ L:1576 D:140 EF:40 EB:0 ET:0 EL:0 ]
+Mon Oct 12 16:17:37 2015 Socket Buffers: R=[65536->65536] S=[65536->65536]
+Mon Oct 12 16:17:37 2015 Data Channel MTU parms [ L:1576 D:1450 EF:44 EB:135 ET:32 EL:0 AF:3/1 ]
+Mon Oct 12 16:17:37 2015 Local Options hash (VER=V4): '2547efd2'
+Mon Oct 12 16:17:37 2015 Expected Remote Options hash (VER=V4): '77cf0943'
+Mon Oct 12 16:17:37 2015 Attempting to establish TCP connection with 127.0.0.1:1194
+Mon Oct 12 16:17:37 2015 TCP connection established with 127.0.0.1:1194
+Mon Oct 12 16:17:37 2015 TCPv4_CLIENT link local: [undef]
+Mon Oct 12 16:17:37 2015 TCPv4_CLIENT link remote: 127.0.0.1:1194
+Mon Oct 12 16:17:37 2015 TLS: Initial packet from 127.0.0.1:1194, sid=12a99fd5 f851ad11
+Mon Oct 12 16:17:37 2015 WARNING: this configuration may cache passwords in memory -- use the auth-nocache option to prevent this
+Mon Oct 12 16:17:38 2015 VERIFY OK: depth=1, /C=fr/ST=fr/L=fr/O=arckosfr.fr/OU=vpn.arckosfr.fr/CN=vpn.arckosfr.fr/name=changeme/emailAddress=mail@host.domain
+Mon Oct 12 16:17:38 2015 VERIFY OK: depth=0, /C=fr/ST=fr/L=fr/O=arckosfr.fr/OU=vpn.arckosfr.fr/CN=vpn.arckosfr.fr/name=changeme/emailAddress=mail@host.domain
+Mon Oct 12 16:17:38 2015 Data Channel Encrypt: Cipher 'BF-CBC' initialized with 128 bit key
+Mon Oct 12 16:17:38 2015 Data Channel Encrypt: Using 160 bit message hash 'SHA1' for HMAC authentication
+Mon Oct 12 16:17:38 2015 Data Channel Decrypt: Cipher 'BF-CBC' initialized with 128 bit key
+Mon Oct 12 16:17:38 2015 Data Channel Decrypt: Using 160 bit message hash 'SHA1' for HMAC authentication
+Mon Oct 12 16:17:38 2015 Control Channel: TLSv1, cipher TLSv1/SSLv3 DHE-RSA-AES256-SHA, 1024 bit RSA
+Mon Oct 12 16:17:38 2015 [vpn.arckosfr.fr] Peer Connection Initiated with 127.0.0.1:1194
+Mon Oct 12 16:17:40 2015 SENT CONTROL [vpn.arckosfr.fr]: 'PUSH_REQUEST' (status=1)
+Mon Oct 12 16:17:40 2015 PUSH: Received control message: 'PUSH_REPLY,redirect-gateway def1,dhcp-option DNS 8.8.8.8,dhcp-option DNS 8.8.4.4,route 10.8.0.1,topology net30,ping 5,ping-restart 30,ifconfig 10.8.0.6 10.8.0.5'
+Mon Oct 12 16:17:40 2015 OPTIONS IMPORT: timers and/or timeouts modified
+Mon Oct 12 16:17:40 2015 OPTIONS IMPORT: --ifconfig/up options modified
+Mon Oct 12 16:17:40 2015 OPTIONS IMPORT: route options modified
+Mon Oct 12 16:17:40 2015 OPTIONS IMPORT: --ip-win32 and/or --dhcp-option options modified
+Mon Oct 12 16:17:40 2015 ROUTE default_gateway=192.168.43.1
+Mon Oct 12 16:17:40 2015 TAP-WIN32 device [Ethernet 2] opened: \\.\Global\{430B164C-00A1-4CF9-A1CD-2E2CB5225C64}.tap
+Mon Oct 12 16:17:40 2015 TAP-Win32 Driver Version 9.9 
+Mon Oct 12 16:17:40 2015 TAP-Win32 MTU=1500
+Mon Oct 12 16:17:40 2015 Notified TAP-Win32 driver to set a DHCP IP/netmask of 10.8.0.6/255.255.255.252 on interface {430B164C-00A1-4CF9-A1CD-2E2CB5225C64} [DHCP-serv: 10.8.0.5, lease-time: 31536000]
+Mon Oct 12 16:17:40 2015 Successful ARP Flush on interface [4] {430B164C-00A1-4CF9-A1CD-2E2CB5225C64}
+Mon Oct 12 16:17:45 2015 TEST ROUTES: 2/2 succeeded len=1 ret=1 a=0 u/d=up
+Mon Oct 12 16:17:45 2015 C:\WINDOWS\system32\route.exe ADD 127.0.0.1 MASK 255.255.255.255 192.168.43.1
+Mon Oct 12 16:17:45 2015 ROUTE: CreateIpForwardEntry succeeded with dwForwardMetric1=25 and dwForwardType=4
+Mon Oct 12 16:17:45 2015 Route addition via IPAPI succeeded [adaptive]
+Mon Oct 12 16:17:45 2015 C:\WINDOWS\system32\route.exe ADD 0.0.0.0 MASK 128.0.0.0 10.8.0.5
+Mon Oct 12 16:17:45 2015 ROUTE: route addition failed using CreateIpForwardEntry: L’objet existe déjà.   [status=5010 if_index=4]
+Mon Oct 12 16:17:45 2015 Route addition via IPAPI failed [adaptive]
+Mon Oct 12 16:17:45 2015 Route addition fallback to route.exe
+L'ajout de l'itin‚raire a ‚chou‚ÿ: L'objet existe d‚j….
+Mon Oct 12 16:17:45 2015 C:\WINDOWS\system32\route.exe ADD 128.0.0.0 MASK 128.0.0.0 10.8.0.5
+Mon Oct 12 16:17:45 2015 ROUTE: route addition failed using CreateIpForwardEntry: L’objet existe déjà.   [status=5010 if_index=4]
+Mon Oct 12 16:17:45 2015 Route addition via IPAPI failed [adaptive]
+Mon Oct 12 16:17:45 2015 Route addition fallback to route.exe
+L'ajout de l'itin‚raire a ‚chou‚ÿ: L'objet existe d‚j….
+Mon Oct 12 16:17:45 2015 C:\WINDOWS\system32\route.exe ADD 10.8.0.1 MASK 255.255.255.255 10.8.0.5
+Mon Oct 12 16:17:45 2015 ROUTE: route addition failed using CreateIpForwardEntry: L’objet existe déjà.   [status=5010 if_index=4]
+Mon Oct 12 16:17:45 2015 Route addition via IPAPI failed [adaptive]
+Mon Oct 12 16:17:45 2015 Route addition fallback to route.exe
+L'ajout de l'itin‚raire a ‚chou‚ÿ: L'objet existe d‚j….
+Mon Oct 12 16:17:45 2015 Initialization Sequence Completed
