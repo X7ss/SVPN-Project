@@ -128,13 +128,13 @@
           <Property name="Text">SVPN Editor Version : 6.0</Property>
           <Property name="TextAlign">TopCenter</Property>
         </Object>
-        <Object type="System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="labelSVPNClientVersion79" children="Controls">
+        <Object type="System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="labelSVPNClientVersion8" children="Controls">
           <Property name="Anchor">Top, Right</Property>
           <Property name="Location">2, 39</Property>
-          <Property name="Name">labelSVPNClientVersion79</Property>
+          <Property name="Name">labelSVPNClientVersion8</Property>
           <Property name="Size">137, 23</Property>
           <Property name="TabIndex">5</Property>
-          <Property name="Text">SVPN Client Version : 7.9</Property>
+          <Property name="Text">SVPN Client Version : 8</Property>
           <Property name="TextAlign">TopCenter</Property>
         </Object>
         <Object type="System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="labelAbout" children="Controls">
