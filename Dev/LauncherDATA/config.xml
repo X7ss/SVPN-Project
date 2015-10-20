@@ -1,0 +1,11 @@
+<config>
+	<server>
+		<ping>
+			<fr>92.222.28.250</fr>
+			<nl>185.52.1.13</nl>
+			<us>192.157.242.248</us>
+		</ping>
+		<something-kewl-stuff-comming-soon>
+		</something-kewl-stuff-comming-soon>
+	</server>
+</config>

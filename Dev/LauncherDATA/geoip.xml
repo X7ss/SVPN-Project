@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="geo.xsl"?>
-<Response> 	<IP>185.52.1.13</IP> 	<CountryCode>NL</CountryCode> 	<CountryName>Netherlands</CountryName> 	<RegionCode></RegionCode> 	<RegionName></RegionName> 	<City></City> 	<ZipCode></ZipCode> 	<TimeZone>Europe/Amsterdam</TimeZone> 	<Latitude>52.367</Latitude> 	<Longitude>4.9</Longitude> 	<MetroCode>0</MetroCode> </Response>

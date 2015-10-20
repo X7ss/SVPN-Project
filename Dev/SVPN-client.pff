@@ -19,6 +19,17 @@
     <Property name="Name">formSVPNClientV82</Property>
     <Property name="Text">SVPN-Client V8.2</Property>
     <Event name="Load">formSVPNClientV82_Load</Event>
+    <Object type="System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="richtextbox1" children="Controls">
+      <Property name="Font">Calibri, 12pt</Property>
+      <Property name="Location">16, 12</Property>
+      <Property name="Name">richtextbox1</Property>
+      <Property name="ReadOnly">True</Property>
+      <Property name="Size">323, 260</Property>
+      <Property name="TabIndex">12</Property>
+      <Property name="Text">
+      </Property>
+      <Event name="TextChanged">richtextbox1_TextChanged</Event>
+    </Object>
     <Object type="System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="checkboxRemoveTapWin32" children="Controls">
       <Property name="BackColor">Transparent</Property>
       <Property name="ForeColor">White</Property>
@@ -29,16 +40,6 @@
       <Property name="Text">Remove Tap win 32</Property>
       <Property name="UseVisualStyleBackColor">False</Property>
       <Event name="CheckedChanged">checkboxRemoveTapWin32_CheckedChanged</Event>
-    </Object>
-    <Object type="System.Windows.Forms.WebBrowser, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="webbrowser1ip" children="Controls">
-      <Property name="Anchor">Top, Bottom, Left, Right</Property>
-      <Property name="Location">16, 12</Property>
-      <Property name="MaximumSize">1920, 1080</Property>
-      <Property name="MinimumSize">20, 20</Property>
-      <Property name="Name">webbrowser1ip</Property>
-      <Property name="Size">323, 260</Property>
-      <Property name="TabIndex">10</Property>
-      <Event name="DocumentCompleted">webbrowser1ip_DocumentCompleted</Event>
     </Object>
     <Object type="System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="MAJServeur" children="Controls">
       <Property name="Anchor">Bottom, Left</Property>
@@ -502,8 +503,7 @@ $formSVPNClientV82_Load={
 		$popadm.Popup("Please Run SVPN Client as Admin !",0,"Warning !",16+0)
 		[Environment]::Exit(0)
 	}else{}
-		$webbrowser1ip.Visible = $false
-	$webbrowser1ip2.Visible = $false
+		$richtextbox1.Visible = $false
 	$date.Text=Get-Date -Format "dddd d MMMM yyyy"
 	$nlp=$ConfigFile.config.server.ping.nl
 	$usp=$ConfigFile.config.server.ping.us
@@ -591,7 +591,7 @@ else {
 	$webclientver = New-Object System.Net.WebClient
 	$webclientver.DownloadFile("http://svpn.x7sshme.com",".\LauncherDATA\version.ver")
 	$versioncl = Get-Content .\LauncherDATA\version.ver
-	if ($versioncl -eq "version 8.1") {}
+	if ($versioncl -eq "version 8.2") {}
 	else {
 		$wshellclver = New-Object -ComObject Wscript.Shell -ErrorAction Stop
 $wshellclver.Popup("you're version is outdated ! , download the new one :)",0,"Update",64+0)
@@ -678,26 +678,37 @@ Get-Process  stunnel* | Stop-Process
 }
 
 $MAJServeur_Click={
-if ($webbrowser1ip.Visible -eq $true) {
+$ErrorActionPreference= 'silentlycontinue'
+if ($richtextbox1.Visible -eq $true) {
 $MAJServeur.Text = "IP test"
-$webbrowser1ip.Visible = $false
+$richtextbox1.Visible = $false
 }else{
-	$ErrorActionPreference= 'silentlycontinue'
-	if ((Test-Path .\LauncherDATA\geoip.xml) -eq $true){
-		Remove-Item .\LauncherDATA\geoip.xml
-		}else {}
 	$webclientip = New-Object System.Net.WebClient
 	$webclientip.DownloadFile("http://freegeoip.net/xml/",".\LauncherDATA\geo.xml")
-	$fileip = ".\LauncherDATA\geo.xml"
-	(gc $fileip | select -Skip 1) | sc $fileip
-	New-Item .\LauncherDATA\geoip.xml
-	Add-Content .\LauncherDATA\geoip.xml '<?xml version="1.0" encoding="UTF-8"?>'
-	Add-Content .\LauncherDATA\geoip.xml '<?xml-stylesheet type="text/xsl" href="geo.xsl"?>'
-	$geofileip = Get-Content .\LauncherDATA\geo.xml
-	Add-Content .\LauncherDATA\geoip.xml "$geofileip"
-	$filepathip = Get-ChildItem .\launcherDATA\ -Filter geoip.xml -Recurse | % { $_.FullName }
-	$webbrowser1ip.Visible = $true
-	$webBrowser1ip.Navigate("$filepathip")
+	[xml]$majfile = Get-Content .\launcherDATA\geo.xml
+$majIP = $majfile.Response.IP
+$CountryCode = $majfile.Response.CountryCode
+$CountryName = $majfile.Response.CountryName
+$RegionCode = $majfile.Response.RegionCode
+$RegionName = $majfile.Response.RegionName
+$City = $majfile.Response.City
+$ZipCode = $majfile.Response.ZipCode
+$TimeZone = $majfile.Response.TimeZone
+$Latitude = $majfile.Response.Latitude
+$Longitude = $majfile.Response.Longitude
+$MetroCode = $majfile.Response.Metrocode
+	$richtextbox1.Text = "IP : $majIP
+CountryCode : $CountryCode
+CountryName : $CountryName
+RegionCode : $RegionCode
+RegionName : $RegionName
+City : $City
+ZipCode : $ZipCode
+TimeZone : $TimeZone
+Latitude : $Latitude
+Longitude : $Longitude
+MetroCode : $Metrocode"
+	$richtextbox1.Visible = $true
 	$MAJServeur.Text = "OK"
 	}
 }
@@ -807,33 +818,6 @@ $timer1_Tick={
 	$clocklabel.text = (Get-Date).ToString("HH:mm:ss")	
 }
 
-$webbrowser1ip_DocumentCompleted=[System.Windows.Forms.WebBrowserDocumentCompletedEventHandler]{
-	
-}
-function Show-NotifyIcon
-{
-	 param(
-	  [Parameter(Mandatory = $true, Position = 0)]
-	  [ValidateNotNull()]
-	  [System.Windows.Forms.NotifyIcon]$NotifyIcon,
-	  [Parameter(Mandatory = $true, Position = 1)]
-	  [ValidateNotNullOrEmpty()]
-	  [String]$BalloonTipText,
-	  [Parameter(Position = 2)]
-	  [String]$BalloonTipTitle = '',
-	  [Parameter(Position = 3)]
-	  [System.Windows.Forms.ToolTipIcon]$BalloonTipIcon = 'None',
-	  [Parameter(Position = 4)]
-	  [int]$Timeout = 0
- 	)
-	
-	if($NotifyIcon.Icon -eq $null)
-	{
-		$NotifyIcon.Icon = [System.Drawing.Icon]::ExtractAssociatedIcon([System.Windows.Forms.Application]::ExecutablePath)
-	}
-	
-	$NotifyIcon.ShowBalloonTip($Timeout, $BalloonTipTitle, $BalloonTipText, $BalloonTipIcon)
-}
 $picturebox10_Click={
 $sourceforge = "https://sourceforge.net/projects/svpn-project/"
 Start-Process $sourceforge
@@ -845,11 +829,14 @@ Start-Process $git
 }
 
 $checkboxRemoveTapWin32_CheckedChanged={
-	#TODO: Place custom script here
+	
+}
+
+$richtextbox1_TextChanged={
 	
 }
 ]]></Code>
-  <Mode>1</Mode>
+  <Mode>0</Mode>
   <Assemblies>
     <Assembly>System.Management.Automation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</Assembly>
     <Assembly>mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Assembly>
@@ -864,12 +851,12 @@ $checkboxRemoveTapWin32_CheckedChanged={
   </Assemblies>
   <Packager>
     <General>
-      <PackageName>SVPN-Client V8.2 x64</PackageName>
+      <PackageName>SVPN-Client V8.2 x32</PackageName>
       <PackageIcon>D:\SVPN8\LauncherDATA\picture\devilmad.ico</PackageIcon>
       <ManifestCreation>1</ManifestCreation>
       <CustomManifest>
       </CustomManifest>
-      <Platform>5</Platform>
+      <Platform>4</Platform>
       <RunSTA>1</RunSTA>
       <PowerShellVersion>3</PowerShellVersion>
     </General>
