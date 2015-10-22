@@ -1,11 +1,14 @@
 <config>
 	<server>
 		<ping>
-			<fr>92.222.28.250</fr>
+			<fr>185.52.1.13</fr>
 			<nl>185.52.1.13</nl>
 			<us>192.157.242.248</us>
 		</ping>
-		<something-kewl-stuff-comming-soon>
-		</something-kewl-stuff-comming-soon>
+		<startup>
+			<ping>True</ping>
+			<updatever>http://svpn.x7sshme.com</updatever>
+			<uppage>https://sourceforge.net/projects/svpn-project/</uppage>
+		</startup>
 	</server>
 </config>

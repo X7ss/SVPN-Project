@@ -48,5 +48,7 @@ Windows 7 64 bits -> Work (with powershell v4 update)
 
 
 ################--NEWS--############################
-Free access on USA server for a limited time 
-For SVPN7.8-multi.7z
+Free access on USA server 
+Free access on NL server
+
+Donate if you like the project :)
