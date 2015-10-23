@@ -121,13 +121,13 @@
           <Property name="Text">PowerShell Version : V 4</Property>
           <Property name="TextAlign">TopCenter</Property>
         </Object>
-        <Object type="System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="labelSVPNEditorVersion60" children="Controls">
+        <Object type="System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="labelSVPNEditorVersion80" children="Controls">
           <Property name="Anchor">Top, Right</Property>
           <Property name="Location">5, 62</Property>
-          <Property name="Name">labelSVPNEditorVersion60</Property>
+          <Property name="Name">labelSVPNEditorVersion80</Property>
           <Property name="Size">137, 23</Property>
           <Property name="TabIndex">6</Property>
-          <Property name="Text">SVPN Editor Version : 6.0</Property>
+          <Property name="Text">SVPN Editor Version : 8.0</Property>
           <Property name="TextAlign">TopCenter</Property>
         </Object>
         <Object type="System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="labelSVPNClientVersion83" children="Controls">
@@ -827,6 +827,7 @@ $picturebox11_Click={
 $git = "https://github.com/X7ss/SVPN-Project"
 Start-Process $git
 }
+
 ]]></Code>
   <Mode>0</Mode>
   <Assemblies>
@@ -843,12 +844,12 @@ Start-Process $git
   </Assemblies>
   <Packager>
     <General>
-      <PackageName>SVPN-Client V8.3 x64</PackageName>
+      <PackageName>SVPN-Client V8.3 x32</PackageName>
       <PackageIcon>D:\SVPN8\LauncherDATA\picture\devilmad.ico</PackageIcon>
       <ManifestCreation>1</ManifestCreation>
       <CustomManifest>
       </CustomManifest>
-      <Platform>5</Platform>
+      <Platform>4</Platform>
       <RunSTA>1</RunSTA>
       <PowerShellVersion>3</PowerShellVersion>
     </General>
